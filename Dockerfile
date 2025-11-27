@@ -1,5 +1,6 @@
 # Use a full JDK image that exists
-FROM openjdk:17-jdk
+FROM eclipse-temurin:17-jdk
+
 
 
 # Copy the JAR from the repo root
