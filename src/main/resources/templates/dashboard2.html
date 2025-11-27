@@ -27,6 +27,14 @@
         html {
             overflow-y: scroll;
         }
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+            }
+            .row > div {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>

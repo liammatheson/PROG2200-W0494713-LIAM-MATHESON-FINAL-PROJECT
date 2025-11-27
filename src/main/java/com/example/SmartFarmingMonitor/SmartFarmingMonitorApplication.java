@@ -25,3 +25,5 @@ public class SmartFarmingMonitorApplication {
 		// not sure if this is necessary. render was giving whitelabel at first but i wasnt adding /dashboard to the url. not sure if that or this fixed it.
     }
 }
+
+// ./mvnw.cmd clean package
