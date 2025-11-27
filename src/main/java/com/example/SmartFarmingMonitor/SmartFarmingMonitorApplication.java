@@ -11,7 +11,6 @@ public class SmartFarmingMonitorApplication {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(SmartFarmingMonitorApplication.class);
 
-        // Use Render's PORT if set, fallback to 8080 for local
         String port = System.getenv("PORT");
         if (port == null || port.isEmpty()) {
             port = "8080";
@@ -22,5 +21,7 @@ public class SmartFarmingMonitorApplication {
         app.setDefaultProperties(props);
 
         app.run(args);
+
+		// not sure if this is necessary. render was giving whitelabel at first but i wasnt adding /dashboard to the url. not sure if that or this fixed it.
     }
 }
