@@ -1,5 +1,6 @@
 # Use a full JDK image that exists
-FROM openjdk:17-oracle
+FROM openjdk:17-jdk
+
 
 # Copy the JAR from the repo root
 COPY SmartFarmingMonitor-0.0.1-SNAPSHOT.jar /app.jar
