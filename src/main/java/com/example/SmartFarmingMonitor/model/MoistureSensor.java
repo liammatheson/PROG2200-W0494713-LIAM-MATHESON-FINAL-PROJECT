@@ -1,7 +1,5 @@
 package com.example.SmartFarmingMonitor.model;
 
-import com.example.SmartFarmingMonitor.service.AlertService;
-
 import jakarta.persistence.Entity;
 
 @Entity
