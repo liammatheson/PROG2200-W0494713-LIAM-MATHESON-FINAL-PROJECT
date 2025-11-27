@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; 
+        }
+        .row {
+            display: flex;
+            gap: 20px; 
+        }
+        .row.two-columns > div,
+        .row.one-column > div {
+            flex: 1;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+        html {
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+<h1>Smart Farming Monitor</h1>
+<div class="dashboard">
+    <!-- First row: 2 columns -->
+    <div class="row two-columns">
+        <div>
+            <h2>Sensor Readings</h2>
+            <ul>
+                <li>Moisture: <span th:text="${moisture}">0</span></li>
+                <li>Temperature: <span th:text="${temperature}">0</span></li>
+                <li>Nutrients: <span th:text="${nutrients}">0</span></li>
+            </ul>
+        </div>
+
+        <div id="weather-widget">
+            <h3>Current Weather</h3>
+            <p>Temperature: <span th:text="${weather.temperature}">--</span>°C</p>
+            <p>Wind Speed: <span th:text="${weather.windspeed}">--</span> km/h</p>
+            <p>Wind Direction: <span th:text="${weather.winddirection}">--</span>°</p>
+        </div>
+    </div>
+
+    <!-- Second row: 2 columns -->
+    <div class="row two-columns">
+        <div>
+            <h2>Recent Irrigation Events</h2>
+            <ul>
+                <li th:each="i : ${irrigations}">
+                    <span th:text="${i.value}">0</span> at 
+                    <span th:text="${i.time}">YYYY-MM-DD HH:MM</span>
+                </li>
+            </ul>
+
+            <h2>Recent Fertilization Events</h2>
+            <ul>
+                <li th:each="f : ${fertilizations}">
+                    <span th:text="${f.value}">0</span> at 
+                    <span th:text="${f.time}">YYYY-MM-DD HH:MM</span>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="irrigation-form">
+                <h3>Irrigation Event</h3>
+                <form action="/dashboard/irrigation/add" method="post">
+                    <label for="value">Amount:</label>
+                    <input type="number" name="value" step="0.1" required>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+            <div class="fertilize-form">
+                <h3>Fertilize</h3>
+                <form action="/dashboard/fertilize/add" method="post">
+                    <label for="value">Amount:</label>
+                    <input type="number" name="value" step="0.1" required>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Third row: 3 charts -->
+    <div class="row one-column">
+        <div>
+            <h3>Moisture Chart</h3>
+            <canvas id="moistureChart" width="400" height="200"></canvas>
+        </div>
+        <div>
+            <h3>Temperature Chart</h3>
+            <canvas id="temperatureChart" width="400" height="200"></canvas>
+        </div>
+        <div>
+            <h3>Nutrient Chart</h3>
+            <canvas id="nutrientChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- Fourth row: 1 column -->
+    <div class="row one-column">
+        <div>
+            <h2>Active Alerts</h2>
+            <ul>
+                <li th:each="a : ${alerts}" th:text="${a.message}">Alert message</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script th:inline="javascript">
+document.addEventListener('DOMContentLoaded', () => {
+    // Moisture chart
+    new Chart(document.getElementById('moistureChart').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: [[${moistureTimesJson}]],
+            datasets: [{
+                label: 'Moisture',
+                data: [[${moistureValuesJson}]],
+                borderColor: 'green',
+                backgroundColor: 'rgba(0,128,0,0.2)',
+                fill: true
+            }]
+        },
+        options: { responsive: false, scales: { y: { beginAtZero: true } } }
+    });
+
+    // Temperature chart
+    new Chart(document.getElementById('temperatureChart').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: [[${temperatureTimesJson}]],
+            datasets: [{
+                label: 'Temperature',
+                data: [[${temperatureValuesJson}]],
+                borderColor: 'red',
+                backgroundColor: 'rgba(255,0,0,0.2)',
+                fill: true
+            }]
+        },
+        options: { responsive: false, scales: { y: { beginAtZero: true } } }
+    });
+
+    // Nutrient chart
+    new Chart(document.getElementById('nutrientChart').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: [[${nutrientTimesJson}]],
+            datasets: [{
+                label: 'Nutrients',
+                data: [[${nutrientValuesJson}]],
+                borderColor: 'blue',
+                backgroundColor: 'rgba(0,0,255,0.2)',
+                fill: true
+            }]
+        },
+        options: { responsive: false, scales: { y: { beginAtZero: true } } }
+    });
+});
+</script>
+</body>
+</html>

@@ -124,6 +124,13 @@
 
 </div>
 
+<div id="weather-widget">
+    <h3>Current Weather</h3>
+    <p>Temperature: <span th:text="${weather.temperature}">--</span>°C</p>
+    <p>Wind Speed: <span th:text="${weather.windspeed}">--</span> km/h</p>
+    <p>Wind Direction: <span th:text="${weather.winddirection}">--</span>°</p>
+</div>
+
 <div class="row2">
     <div class="irrigation-form">
         <h3>Irrigation Event</h3>
