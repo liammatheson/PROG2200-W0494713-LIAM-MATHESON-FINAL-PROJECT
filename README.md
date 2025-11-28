@@ -35,7 +35,7 @@ https://prog2200-w0494713-liam-matheson-final.onrender.com/dashboard
 ### v2.0
 - New look with flexbox  
 - Added two more charts for temperature and nutrients  
-- Weather widget now gets live data from [Open-Meteo](https://api.open-meteo.com)
+- New Weather widget now gets live data from [Open-Meteo](https://api.open-meteo.com)
   
 ![Version 2](docs/screenshotv2.png)
 
