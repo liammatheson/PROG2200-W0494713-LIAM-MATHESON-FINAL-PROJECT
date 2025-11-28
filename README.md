@@ -28,13 +28,15 @@ https://prog2200-w0494713-liam-matheson-final.onrender.com/dashboard
 - Recent irrigation and nutrient events  
 - Can input new events that show up on the page  
 - Single chart for moisture (other charts to be added next)  
-- Alerts appear at the bottom  
+- Alerts appear at the bottom
+  
 ![Version 1](docs/screenshotv1.png)
 
 ### v2.0
 - New look with flexbox  
 - Added two more charts for temperature and nutrients  
-- Weather widget now gets live data from [Open-Meteo](https://api.open-meteo.com)  
+- Weather widget now gets live data from [Open-Meteo](https://api.open-meteo.com)
+  
 ![Version 2](docs/screenshotv2.png)
 
 ---
