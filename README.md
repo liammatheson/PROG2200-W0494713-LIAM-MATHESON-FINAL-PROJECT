@@ -53,3 +53,14 @@ https://prog2200-w0494713-liam-matheson-final.onrender.com/dashboard
 - Clone the repo
 - Run the .jar file. It is in the root folder.
 - Access the program: open your browser and go to http://localhost:8080
+
+---
+
+## Diagrams
+
+# ERD
+![erd](erd2.png)
+
+# UML
+![uml](uml2.png)
+
